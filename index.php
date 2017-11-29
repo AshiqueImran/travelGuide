@@ -3,7 +3,8 @@
     require 'admin/header.php';
     require 'admin/sql.php';
 
-    if(empty($_SESSION['user']) && empty($_SESSION['mail']))
+
+    if(empty($_SESSION['user']) || empty($_SESSION['mail']))
     {
     	echo '<body class="backPic"><div class="container"><div class="row space"><div class="col-md-2"></div><div class="col-md-8 text-center">';
     	echo'<h1 class="text-center center-block intelligent">Intelligent Travel Guide</h1>';
@@ -12,6 +13,13 @@
 	   	echo '<a href="user/reg.php"><button type="button" class="btn btn-warning btn-lg adminButton2">Go to Registration</button></a><br>';
 	   	echo '</div><div class="col-md-2"></div></div></div></body></html>';
 	   	exit(); //does not look the codes under this line.
+    }
+    else
+    {
+          include 'tts/TextToVoice.php';
+          $text="Hello ".$_SESSION['user'].".you can choose destination from search box or press auto suggest to get suggested based on your favourite category.";
+
+         echo '<audio src="' . getVoice($text) . '" autoplay="autoplay"></audio>';
     }
 
 ?>
