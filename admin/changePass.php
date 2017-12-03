@@ -60,7 +60,7 @@ $conn->close();
   <div class="col-md-2"></div>
   <div class="col-md-8">
   <div class="header text-center center-block">
-  <h2>Admin Panel Registration</h2>
+  <h2>Admin Panel Password</h2>
   </div>
   <form action="changePass.php" method="post">
     <div class="form-group">
