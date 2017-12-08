@@ -18,8 +18,8 @@
     {
           include 'tts/TextToVoice.php';
           $text="Hello ".$_SESSION['user'].".you can choose destination from search box or press auto suggest to get suggested based on your favourite category.";
-
-         echo '<audio src="' . getVoice($text) . '" autoplay="true"></audio>';
+          echo '<audio src="' . getVoice($text) . '" autoplay="true"></audio>';
+         //echo '<audio src="' . getVoice($text) . '" autoplay="autoplay"></audio>';
     }
 
 ?>
@@ -29,8 +29,8 @@
   <div class="col-md-2"></div>
     <div class="col-md-8">
 		<div class="btn-group text-center center-block adminButton">
-		<a href="#"><button type="button" class="btn btn-success">My bookings</button></a>
-    <a href="#"><button type="button" class="btn btn-warning">Change Password</button></a>
+		<a href="user/booking.php"><button type="button" class="btn btn-success">My bookings</button></a>
+    <a href="user/pass.php"><button type="button" class="btn btn-warning">Change Password</button></a>
     <a href="user/logout.php"><button type="button" class="btn btn-primary">Logout</button></a>
 		</div>
       <form style="border : none;" action="details.php" method="post">
