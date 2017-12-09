@@ -18,7 +18,7 @@
 		{
 			$start=$_GET["start"];
 			$end=$_GET["end"];
-			$checkSql="SELECT `bookingplace`, `time`, `status` FROM `bookingtable` WHERE `bookedby` ='".$_SESSION['mail']."' order by `time` DESC limit $start,$end";
+			$checkSql="SELECT `bookingplace`, `time`, `status` , `price` FROM `bookingtable` WHERE `bookedby` ='".$_SESSION['mail']."' order by `time` DESC limit $start,$end";
 			$result=$conn->query($checkSql);
 			//print_r($result);
 			if($_GET["button"]=="next"&&$_GET["end"]<=$result->num_rows)
@@ -33,8 +33,9 @@
  <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Plcae</th>
+        <th>Place</th>
         <th>Date</th>
+        <th>Bill</th>
         <th>Current Status</th>
       </tr>
     </thead>
@@ -48,6 +49,7 @@
 			echo "<tr>";
 				echo "<td>".$allData["bookingplace"]."</td>";
 				echo "<td>".$allData["time"]."</td>";
+				echo "<td>".$allData["price"]."</td>";
 				echo "<td>".$allData["status"]."</td>";
 			echo "</tr>";
 		  }
