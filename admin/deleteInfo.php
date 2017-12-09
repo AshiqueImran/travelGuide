@@ -40,7 +40,7 @@ if($_GET["button"]=="next"&&$_GET["end"]<=$result->num_rows && empty($_GET["id"]
 	$_GET["start"]=$_GET["end"];
 	$_GET["end"]=$_GET["end"]+5;
 }
-if($_GET["button"]=="pre"&&$_GET["start"]>=$result->num_rows && empty($_GET["id"]))
+if($_GET["button"]=="pre"&&$_GET["start"]>=0 && empty($_GET["id"]))
 {
 	$_GET["end"]=$_GET["start"];
 	$_GET["start"]=$_GET["start"]-5;
@@ -56,7 +56,11 @@ if($_GET["button"]=="pre"&&$_GET["start"]>=$result->num_rows && empty($_GET["id"
         <th>Plcae</th>
         <th>Details</th>
         <th>Category</th>
+        <th>Hotel</th>
+        <th>Capacity</th>
+        <th>Count</th>
         <th>Delete Button</th>
+        <th>Edit Button</th>
       </tr>
     </thead>
 
@@ -70,7 +74,11 @@ if($_GET["button"]=="pre"&&$_GET["start"]>=$result->num_rows && empty($_GET["id"
 				echo "<td>".$allData["plcaeName"]."</td>";
 				echo "<td>".$allData["details"]."</td>";
 				echo "<td>".$allData["category"]."</td>";
+				echo "<td>".$allData["hotel"]."</td>";
+				echo "<td>".$allData["capacity"]."</td>";
+				echo "<td>".$allData["count"]."</td>";
 				echo '<td><button><a href="deleteInfo.php?start='.$_GET["start"].'&end='.$_GET["end"].'&id='.$allData["id"].'">Delete</a></button></td>';
+				echo '<td><button><a target="_blank" href="editInfo.php?id='.$allData["id"].'">Edit</a></button></td>';
 			echo "</tr>";
 		  }
 	}

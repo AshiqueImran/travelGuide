@@ -50,7 +50,7 @@ else
 	   	echo "<h1>Choose any option: </h1>";
 	   	echo '<a href="newAdmin.php"><button type="button" class="btn btn-success btn-lg adminButton">Add new admin</button></a><br>';
 	   	echo '<a href="changePass.php"><button type="button" class="btn btn-primary btn-lg adminButton">Change password</button></a><br>';
-	   	echo '<a href="#"><button type="button" class="btn btn-warning btn-lg adminButton">Show bookings</button></a><br>';
+	   	echo '<a href="confirmBooking.php"><button type="button" class="btn btn-warning btn-lg adminButton">Show bookings</button></a><br>';
 	   	echo '<a href="addInfo.php"><button type="button" class="btn btn-info btn-lg adminButton">Add new info</button></a><br>';
 	   	echo '<a href="deleteInfo.php"><button type="button" class="btn btn-danger btn-lg adminButton">Delete info</button></a><br>';
 	   	echo '<a href="logout.php"><button type="button" class="btn btn-basic btn-lg adminButton">Logout</button></a><br>';

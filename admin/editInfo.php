@@ -2,13 +2,16 @@
 	session_start();
 	require 'header.php';
 	require 'sql.php';
-
+	if(empty($_SESSION["id"]))
+	{
+		$_SESSION["id"]=0;
+	}
 
 	if($_SESSION['name']!=false && $_SESSION['email']!=false)
 	{
 		if(empty($_POST["name"]) || empty($_POST["details"]) || empty($_POST["category"]))
 		{
-			echo'<h1 class="text-center center-block redColor"> Fill the data table</h1>';
+			echo'<h1 class="text-center center-block redColor"> Fill the data table To Edit</h1>';
 		}
 		else
 		{
@@ -17,36 +20,40 @@
 			$category=mysqli_real_escape_string($conn,test_input($_POST["category"]));
 			$capacity=mysqli_real_escape_string($conn,test_input($_POST["capacity"]));
 			$hotel=mysqli_real_escape_string($conn,test_input($_POST["hotel"]));
-			$checkSql="SELECT `id` FROM `placetable` WHERE `plcaeName`='".$name."'";
 
-			$result=$conn->query($checkSql);
-			$row = $result->fetch_assoc();
-			if(empty($row["id"]))
+			$query="update `placetable` set plcaeName='".$name."',"."details='".$details."',"."category='".$category."',"."hotel='".$hotel."',"."capacity='".$capacity."',lastEdit='".$_SESSION['email']."' where id=".$_SESSION["id"];
+			
+			if ($conn->query($query) === TRUE)
 			{
-				$sql="INSERT INTO `placetable`(`plcaeName`, `details`, `lastEdit`, `category` ,`capacity`, `hotel`) VALUES ('" .$name."','".$details."','".$_SESSION['email']."','".$category."','".$capacity."','".$hotel."')";
-				if ($conn->query($sql) === TRUE) //insert data sent to DB
-					{
-					  echo'<h1 class="text-center center-block greenColor">One data updated</h1>';
-					} 
-					else 
-					{
-					    //echo "Error: " . $sql . "<br>" . $conn->error;
-					    echo '<h1  class="text-center center-block redColor">Sorry!! Something went wrong</h1>';
-					}
+				$link='editInfo.php?id='.$_SESSION["id"];
+				$_SESSION["id"]=0;
+				header('location:'.$link);
 			}
 			else
 			{
-			  echo'<h1  class="text-center center-block redColor">Place Name already exist</h1>';
+				echo '<h1  class="text-center center-block redColor">Sorry!! Something went wrong</h1>';
 			}
 		}
-			$_POST["name"]="";
-			$_POST["details"]="";
-			$conn->close();
+
+		if(!empty($_GET["id"]))
+		{
+			$sql="select * from `placetable` where `id`=".$_GET["id"];
+			$_SESSION["id"]=$_GET["id"];
+			$result=$conn->query($sql);
+			$allData=$result->fetch_assoc();
 		}
+		else
+		{
+			echo '<h1 class="text-center center-block redColor">No data to show</h1>';
+		}
+	}
 	else
 	{
+		$conn->close();
 		header('location:adminLogin.php');
+		exit();
 	}
+	$conn->close();
 ?>
 <body>
 
@@ -55,27 +62,28 @@
   <div class="col-md-2"></div>
   <div class="col-md-8">
   <div class="header text-center center-block">
-  <h2>Add new info</h2>
+  <h2>Edit info</h2>
   </div>
-  <form action="addInfo.php" method="post">
+  <form action="editInfo.php" method="post">
     <div class="form-group">
       <label for="name">Name of the place</label>
-      <input type="text" class="form-control" name="name" maxlength="90" required> 
+      <input type="text" class="form-control" name="name" maxlength="90"
+      placeholder="<?php echo $allData["plcaeName"] ?>" required> 
       <br/>
       
        <label for="details">Details about the place</label>
-      <textarea class="form-control" rows="5" name="details" maxlength="220" required></textarea>
+      <textarea class="form-control" rows="5" name="details" maxlength="220" placeholder="<?php echo $allData["details"] ?>" required></textarea>
       <br/>
 
         <label for="hotel">Hotel</label>
-      <textarea class="form-control" rows="3" name="hotel" maxlength="200" required></textarea>
+      <textarea class="form-control" rows="3" name="hotel" maxlength="200" placeholder="<?php echo $allData["hotel"] ?>" required></textarea>
       <br/>
 
        <label for="capacity">Capacity</label>
-      <input type="number" class="form-control" name="capacity" required> 
+      <input type="number" class="form-control" name="capacity" placeholder="<?php echo $allData["capacity"] ?>" required> 
       <br/>
 
-   <label for="category">Category</label><br>
+   <label for="category">Category(Previous: <?php echo $allData["category"] ?>)</label><br>
    <select name="category" class="dropdown" required>
     <option disabled selected value> -- select an option -- </option>
     <option value="beach">Beach</option>
