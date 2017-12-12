@@ -30,11 +30,12 @@
   <div class="col-md-2"></div>
     <div class="col-md-8">
 		<div class="btn-group text-center center-block adminButton">
+		<a href="autoSuggest.php"><button type="button" class="btn btn-primary">Auto Suggest</button></a>
 		<a href="user/booking.php"><button type="button" class="btn btn-success">My bookings</button></a>
-    <a href="user/pass.php"><button type="button" class="btn btn-warning">Change Password</button></a>
-    <a href="user/logout.php"><button type="button" class="btn btn-primary">Logout</button></a>
+    	<a href="user/pass.php"><button type="button" class="btn btn-warning">Change Password</button></a>
+    	<a href="user/logout.php"><button type="button" class="btn btn-primary">Logout</button></a>
 		</div>
-      <form style="border : none;" action="details.php" method="post">
+      <form style="border : none;" action="details.php" method="get">
 	    <h3 class="text-center center-block intelligent space">Welcome!!</h3><br />  
 	    <label class="redColor text-center center-block">Enter Place Name</label>  
 	    <input type="text" name="place" id="country" class="form-control" placeholder="Enter Place Name" />  
