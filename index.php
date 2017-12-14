@@ -16,11 +16,15 @@
     }
     else
     {
-          include 'tts/TextToVoice.php';
-          $text="Hello ".$_SESSION['user'].".you can choose destination from search box or press auto suggest to get suggested based on your favourite category.";
-          //echo '<audio src="' . getVoice($text) . '" autoplay="true"></audio>';
+          if(empty($_SESSION['sound']))
+          {
+           include 'tts/TextToVoice.php';
+           $text="Hello ".$_SESSION['user'].".you can choose destination from search box or press auto suggest to get suggested based on your favourite category.";
+          	echo '<audio src="' . getVoice($text) . '" autoplay="true"></audio>';
          
-         //echo '<audio src="' . getVoice($text) . '" autoplay="autoplay"></audio>';
+        	//echo '<audio src="' . getVoice($text) . '" autoplay="autoplay"></audio>';
+           $_SESSION['sound']=true;
+    	}
     }
 
 ?>
