@@ -18,7 +18,7 @@
 		{
 			$start=$_GET["start"];
 			$end=$_GET["end"];
-			$checkSql="SELECT `bookingplace`, `time`, `status` , `price` FROM `bookingtable` WHERE `bookedby` ='".$_SESSION['mail']."' order by `time` DESC limit $start,$end";
+			$checkSql="SELECT `bookingplace`, `hotel`, `time`, `status` , `price` FROM `bookingtable` WHERE `bookedby` ='".$_SESSION['mail']."' order by `time` DESC limit $start,$end";
 			$result=$conn->query($checkSql);
 			//print_r($result);
 			if($_GET["button"]=="next"&&$_GET["end"]<=$result->num_rows)
@@ -27,6 +27,7 @@
 					$_GET["end"]=$_GET["end"]+5;
 				}
 		}
+		$conn->close();
 ?>
 <h2 class="text-center center-block">Visiting places</h2>
 <div class="table-responsive"> 
@@ -34,6 +35,7 @@
     <thead>
       <tr>
         <th>Place</th>
+        <th>Hotel</th>
         <th>Date</th>
         <th>Bill</th>
         <th>Current Status</th>
@@ -48,6 +50,7 @@
 		  {
 			echo "<tr>";
 				echo "<td>".$allData["bookingplace"]."</td>";
+				echo "<td>".$allData["hotel"]."</td>";
 				echo "<td>".$allData["time"]."</td>";
 				echo "<td>".$allData["price"]."</td>";
 				echo "<td>".$allData["status"]."</td>";
@@ -58,13 +61,13 @@
 	{
 		echo "<h3>No results</h3>";
 	}
-	$conn->close();
     ?>
     </tbody>
  </table>
  </div>
 <?php
 echo '<a href="booking.php?start='.$_GET["start"].'&end='.$_GET["end"].'&button=next"><button type="button" class="text-center center-block btn btn-primary adminButton">Next &#8594</button></a>';
+
 ?>
 </body>
 </html>
