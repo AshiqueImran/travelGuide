@@ -1,5 +1,6 @@
 # Intelligent Travel Guide
 *Intelligent Travel Guide* is basically a web app to opt for some best visiting places in [Bangladesh](https://en.wikipedia.org/wiki/Bangladesh).The target audience is mostly the foreign tourists.
+**High speed internet and Google Chrome browser is highly recommended.**
 
 ## Preview
 **landing page** <br />
@@ -22,6 +23,8 @@
 
 ![action_admin](https://user-images.githubusercontent.com/23379542/34918648-2da08a76-f980-11e7-9160-d5856325807f.png)
 
+### Demo 
+[Click me](http://aeronautic-flickers.000webhostapp.com/examples/travelGuide/) 
 
 ## Features
   - custom search option to find any place
@@ -36,7 +39,7 @@
 ## How it works
   - connects to google maps
   - uses api of [wunderground](https://www.wunderground.com/) for weather updates
-  - uses voice serives
+  - uses voice services
   
 ## Technology Used
  - [Bootstrap](https://getbootstrap.com/)
