@@ -1,5 +1,6 @@
 <?php
     session_start();
+    ob_start();
     require '../admin/header.php';
     require '../admin/sql.php';
 
@@ -10,7 +11,8 @@
     }
     else
     {
-      header('location:../index.php');
+      header('location: ../index.php');
+      exit();
     }
 
     if(empty($_POST["email"]) || empty($_POST["pass"]))
@@ -35,7 +37,8 @@
         $_SESSION['user']=$row["name"];
         $_SESSION['mail']=$row["email"];
         $_SESSION['mobile']=$row["mobile"];
-        header('location:../index.php');
+        header('location: ../index.php');
+        exit();
       }
       else
       {
